@@ -1,0 +1,26 @@
+{
+  "name": "mongoose-dgeni-schemas",
+  "version": "0.1.0",
+  "description": "Schemas to be used from mongoose and dgeni",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/andrewstuart/mongoose-dgeni-schemas"
+  },
+  "keywords": [
+    "mongoose",
+    "mongodb",
+    "dgeni",
+    "schema",
+    "documentation"
+  ],
+  "author": "Andrew Stuart",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andrewstuart/mongoose-dgeni-schemas/issues"
+  },
+  "homepage": "https://github.com/andrewstuart/mongoose-dgeni-schemas"
+}
