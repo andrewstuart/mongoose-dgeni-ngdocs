@@ -1,21 +1,22 @@
 {
-  "name": "mongoose-dgeni-schemas",
+  "name": "mongoose-ngdoc-dgeni-schemas",
   "version": "0.1.0",
-  "description": "Schemas to be used from mongoose and dgeni",
+  "description": "Schemas to be used from mongoose and dgeni to store ngdoc objects",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "github.com/andrewstuart/mongoose-dgeni-schemas"
+    "url": "github.com/andrewstuart/mongoose-ngdoc-dgeni-schemas"
   },
   "keywords": [
     "mongoose",
     "mongodb",
     "dgeni",
     "schema",
-    "documentation"
+    "documentation",
+    "ngdoc"
   ],
   "author": "Andrew Stuart",
   "license": "MIT",
