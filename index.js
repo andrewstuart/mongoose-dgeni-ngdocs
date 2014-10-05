@@ -5,7 +5,7 @@ var _ = require('lodash');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var file = module.exports.File = {
+var fileDef = exports.fileDef = {
   lines: {
     start: Number,
     end: Number
@@ -16,7 +16,7 @@ var file = module.exports.File = {
   }
 };
 
-var tag = {
+var tagDef = exports.tagDef = {
   tagDef: {
     name: String,
     required: Boolean,
@@ -27,9 +27,9 @@ var tag = {
   line: Number
 };
 
-var doc = {
-  file: file,
-  tags: [ tag ],
+var docDef = exports.docDef = {
+  file: fileDef,
+  tags: [ tagDef ],
   name: String,
   description: String,
   deprecated: Boolean,
@@ -38,19 +38,22 @@ var doc = {
   priority: Number,
   codeName: String,
   id: String,
-  methods: [ doc ],
-  properties: [ doc ]
+  methods: [ docDef ],
+  properties: [ docDef ],
+  params: [ docDef ]
 };
 
-var Doc = mongoose.model('Doc', new Schema(doc));
+var DocSchema = exports.DocSchema = new Schema(docDef);
 
-function getDocs(doc) {
+exports.Doc = mongoose.model('Doc', DocSchema);
+
+var getDocs = exports.getDocs = function mongooseDocs(doc) {
   var newDoc = {
     file: {
       // ast: doc.fileInfo.ast,
       path : {
-        full: doc.fileInfo.filePath,
-        project: doc.fileInfo.projectRelativePath
+        full: doc.fileInfo && doc.fileInfo.filePath,
+        project: doc.fileInfo && doc.fileInfo.projectRelativePath
       },
       lines: {
         start: doc.startingLine,
@@ -61,6 +64,7 @@ function getDocs(doc) {
     name: doc.name
   };
 
+  //TODO Combine these two iterators and a conditional. Maybe go recursive for coolness factor. I mean efficiency.
   _.each(['name', 'description', 'area', 'api', 'priority', 'codeName', 'id', 'aliases', 'path'],
          function(prop) {
            if(doc[prop]) {
@@ -68,36 +72,11 @@ function getDocs(doc) {
            }
          });
 
-  if(doc.methods) {
-    console.log(doc.methods);
-    newDoc.methods = _.map(doc.methods, getDocs);
-  }
-  if(doc.properties && doc.properties.length) {
-    newDoc.properties = _.map(doc.properties, getDocs);
-  }
+  _.each(['methods', 'properties', 'params'], function(prop) {
+    if(doc[prop]) {
+      newDoc[prop] = _.map(doc[prop], getDocs);
+    }
+  });
 
   return newDoc;
-}
-
-mongoose.connect('mongodb://localhost/test-dev');
-
-module.exports = function jsonTransform() {
-  return {
-    $runAfter: ['providerDocsProcessor'],
-    $process: function(docs) {
-
-      Doc.remove({}, function(err) {
-        var docObjects = _.map(docs, getDocs);
-
-        var deferred = q.defer();
-
-        Doc.create(docObjects, function(err) {
-          if(err) { deferred.reject(err); }
-          else { deferred.resolve(docs); }
-        });
-
-        return deferred.promise;
-      });
-    }
-  };
 };
