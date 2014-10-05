@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "github.com/andrewstuart/mongoose-ngdoc-dgeni-schemas"
+    "url": "github.com/andrewstuart/mongoose-ngdoc-dgeni-ngdoc"
   },
   "keywords": [
     "mongoose",
@@ -21,9 +21,9 @@
   "author": "Andrew Stuart",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/andrewstuart/mongoose-dgeni-schemas/issues"
+    "url": "https://github.com/andrewstuart/mongoose-dgeni-ngdoc/issues"
   },
-  "homepage": "https://github.com/andrewstuart/mongoose-dgeni-schemas",
+  "homepage": "https://github.com/andrewstuart/mongoose-dgeni-ngdoc",
   "dependencies": {
     "lodash": "^2.4.1",
     "mongoose": "^3.8.17"
