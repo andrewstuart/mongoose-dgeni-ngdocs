@@ -3,6 +3,7 @@ Provides terse storage schemas for ngdocs produced by dgeni.
 
 ##Methods
 - getDocs
+    For parsing each document as provided by the `dgeni-packages/ngdoc` processor
 
 ##Properties
 - tagDef
