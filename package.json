@@ -1,6 +1,6 @@
 {
   "name": "mongoose-dgeni-ngdoc",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Schemas to be used from mongoose and dgeni to store ngdoc objects",
   "main": "index.js",
   "scripts": {
